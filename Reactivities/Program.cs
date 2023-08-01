@@ -1,4 +1,7 @@
+using Application.Activities;
+using Application.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +24,12 @@ builder.Services.AddCors(opt =>
         policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
     });
 });
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(ActivityList.Handler).Assembly);
+});
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
 
 var app = builder.Build();
 
