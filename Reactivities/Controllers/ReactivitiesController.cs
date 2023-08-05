@@ -34,5 +34,11 @@ namespace Reactivities.Controllers
             activity.Id = id;
             await Mediator.Send(new Edit.Command {  Activity = activity });
         }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteActivity(Guid id)
+        {
+            await Mediator.Send(new Delete.Command {  Id = id });
+        }
     }
 }

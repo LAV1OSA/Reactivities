@@ -24,7 +24,7 @@ namespace Application.Activities
 
             public async Task<List<Reactivity>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await context.Reactivities.ToListAsync();
+                return await context.Reactivities.ToListAsync(cancellationToken);
             }
         }
     }

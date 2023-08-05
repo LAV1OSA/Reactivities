@@ -3,6 +3,7 @@ using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence;
+using Reactivities.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,25 +12,8 @@ var config = builder.Configuration;
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddLogging();
-builder.Services.AddDbContext<ReactivitiesDb>(opt =>
-{
-    opt.UseSqlServer(config.GetConnectionString("SqlServerCoonection"));
-});
-builder.Services.AddCors(opt =>
-{
-    opt.AddPolicy("CorsPolicy", policy =>
-    {
-        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
-    });
-});
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssembly(typeof(ActivityList.Handler).Assembly);
-});
-builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
+builder.Services.AddApplicationServices(config);
 
 var app = builder.Build();
 
