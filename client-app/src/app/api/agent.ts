@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 import { Reactivity } from '../models/reactivity';
-import { error } from 'console';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
