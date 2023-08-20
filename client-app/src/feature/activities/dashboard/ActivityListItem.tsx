@@ -17,7 +17,6 @@ export default function ActivityListItem({ activity }: Props) {
                             <Item.Header as={Link}>
                                 {activity.title}
                             </Item.Header>
-                            <Item.Description>Hosted by Bob</Item.Description>
                         </Item.Content>
                     </Item>
                 </Item.Group>
@@ -27,9 +26,6 @@ export default function ActivityListItem({ activity }: Props) {
                     <Icon name='clock'/> {activity.date}
                     <Icon name='marker'/> {activity.venue}
                 </span>
-            </Segment>
-            <Segment secondary>
-                Attendees
             </Segment>
             <Segment clearing>
                 <span>{activity.description}</span>

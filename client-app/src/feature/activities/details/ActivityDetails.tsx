@@ -6,8 +6,6 @@ import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import ActivityDetailedHeader from "./ActivityDetailedHeader";
 import ActivityDetailedInfo from "./ActivityDetailedInfo";
-import ActivityDetailedChat from "./ActivityDetailedChat";
-import ActivityDetailedSidebar from "./ActivityDetailedSidebar";
 
 export default observer(function ActivityDetails() {
     
@@ -22,14 +20,10 @@ export default observer(function ActivityDetails() {
     if (loadingInitial || !activity) return <LoadingComponent/>;
 
     return (
-        <Grid>
+        <Grid centered>
             <Grid.Column width={10}>
                 <ActivityDetailedHeader activity={activity}/>
                 <ActivityDetailedInfo activity={activity}/>
-                <ActivityDetailedChat/>
-            </Grid.Column>
-            <Grid.Column width={6}>
-                <ActivityDetailedSidebar/>
             </Grid.Column>
         </Grid>
     )
