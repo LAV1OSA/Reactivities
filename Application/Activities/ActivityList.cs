@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -12,8 +13,8 @@ namespace Application.Activities
 {
     public class ActivityList
     {
-        public class Query : IRequest<List<Reactivity>> { }
-        public class Handler : IRequestHandler<Query, List<Reactivity>>
+        public class Query : IRequest<Result<List<Reactivity>>> { }
+        public class Handler : IRequestHandler<Query, Result<List<Reactivity>>>
         {
             private readonly ReactivitiesDb context;
 
@@ -22,9 +23,9 @@ namespace Application.Activities
                 this.context = context;
             }
 
-            public async Task<List<Reactivity>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Reactivity>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await context.Reactivities.ToListAsync(cancellationToken);
+                return Result<List<Reactivity>>.Success(await context.Reactivities.ToListAsync(cancellationToken));
             }
         }
     }
